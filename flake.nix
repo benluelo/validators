@@ -136,9 +136,9 @@
                 apiKeyFile = "/etc/datadog-agent/datadog_api.key";
                 enableLiveProcessCollection = true;
                 enableTraceAgent = true;
-                site = "us3.datadoghq.com";
+                site = "datadoghq.com";
                 extraIntegrations = { openmetrics = _: [ ]; };
-                # extraConfig = { logs_enabled = true; };
+                extraConfig = { logs_enabled = true; };
                 checks = {
                   journald = { logs = [{ type = "journald"; }]; };
                   openmetrics = {
