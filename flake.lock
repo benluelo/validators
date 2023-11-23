@@ -200,16 +200,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1696410815,
-        "narHash": "sha256-uku47D/L+VzO3sVoZbnexPQPGeQtMwMFBesyaA1vKtE=",
+        "lastModified": 1700212163,
+        "narHash": "sha256-kzX+xSdEpFygE1Cc5D9st0ULlsJ6Q+dmJWZH+NhyOkk=",
         "owner": "shazow",
         "repo": "foundry.nix",
-        "rev": "a56126a754d73f85d904768fed569a9e250388d9",
+        "rev": "25dd5506c02378b85cc66c1cc0fac99bd4d4def2",
         "type": "github"
       },
       "original": {
         "owner": "shazow",
-        "ref": "monthly",
+        "ref": "main",
         "repo": "foundry.nix",
         "type": "github"
       }
@@ -370,11 +370,11 @@
     },
     "nixpkgs-solc": {
       "locked": {
-        "lastModified": 1696879762,
-        "narHash": "sha256-Ud6bH4DMcYHUDKavNMxAhcIpDGgHMyL/yaDEAVSImQY=",
+        "lastModified": 1699781429,
+        "narHash": "sha256-UYefjidASiLORAjIvVsUHG6WBtRhM67kTjEY4XfZOFs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "f99e5f03cc0aa231ab5950a15ed02afec45ed51a",
+        "rev": "e44462d6021bfe23dfb24b775cc7c390844f773d",
         "type": "github"
       },
       "original": {
@@ -575,19 +575,20 @@
         "nixpkgs-vercel": "nixpkgs-vercel",
         "rust-overlay": "rust-overlay_2",
         "treefmt-nix": "treefmt-nix",
-        "v0_14_0": "v0_14_0"
+        "v0_14_0": "v0_14_0",
+        "v0_15_0": "v0_15_0"
       },
       "locked": {
-        "lastModified": 1699392503,
-        "narHash": "sha256-hpsRsLSkqr0Vvcm5A6bxW2jEIEOLVWh6Rh8N/1A6KBQ=",
+        "lastModified": 1700671107,
+        "narHash": "sha256-VuIMbNKI0erJPOH7CG/MhTicac423mCd5mey/oO53tM=",
         "owner": "unionlabs",
         "repo": "union",
-        "rev": "2dbd6c6d3f2a884fcb928161f6a67d1a645c4941",
+        "rev": "d67e54996294aee4e5f8c82a139809699c9f43ac",
         "type": "github"
       },
       "original": {
         "owner": "unionlabs",
-        "ref": "add-unionvisor-to-nixos-module",
+        "ref": "release-v0.15.0",
         "repo": "union",
         "type": "github"
       }
@@ -606,6 +607,23 @@
         "owner": "unionlabs",
         "repo": "union",
         "rev": "14007cbae6d464e70ca68220a36b30cb445f82fd",
+        "type": "github"
+      }
+    },
+    "v0_15_0": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1700671107,
+        "narHash": "sha256-VuIMbNKI0erJPOH7CG/MhTicac423mCd5mey/oO53tM=",
+        "owner": "unionlabs",
+        "repo": "union",
+        "rev": "d67e54996294aee4e5f8c82a139809699c9f43ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "unionlabs",
+        "ref": "release-v0.15.0",
+        "repo": "union",
         "type": "github"
       }
     }
