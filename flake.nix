@@ -144,13 +144,14 @@
                   openmetrics = {
                     init_configs = { };
                     instances = [
-                      {
-                        openmetrics_endpoint = "http://localhost:26660/metrics";
-                        namespace = "cometbft";
-                        metrics = [
-                          ".*"
-                        ];
-                      }
+                      # metrics are stupid expensive and i don't need them for now
+                      # {
+                      #   openmetrics_endpoint = "http://localhost:26660/metrics";
+                      #   namespace = "cometbft";
+                      #   metrics = [
+                      #     ".*"
+                      #   ];
+                      # }
                     ];
                   };
                 };
