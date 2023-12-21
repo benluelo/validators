@@ -282,17 +282,17 @@
     "ibc-go": {
       "flake": false,
       "locked": {
-        "lastModified": 1681504072,
-        "narHash": "sha256-e9z9+VxoQkrvWeYzdxHax6L10eQebRjW7GrD5wnaLv8=",
-        "owner": "strangelove-ventures",
+        "lastModified": 1700058834,
+        "narHash": "sha256-vGtOGyoW3qZwMYHmTWzugx/DAxsiUn8upc49hjL0uJg=",
+        "owner": "cosmos",
         "repo": "ibc-go",
-        "rev": "f8081a1828e47e11791b036659dd6d0e7be5473b",
+        "rev": "c98311964dc550b9fe9a5bff8b6dd8e35bf13642",
         "type": "github"
       },
       "original": {
-        "owner": "strangelove-ventures",
+        "owner": "cosmos",
         "repo": "ibc-go",
-        "rev": "f8081a1828e47e11791b036659dd6d0e7be5473b",
+        "rev": "c98311964dc550b9fe9a5bff8b6dd8e35bf13642",
         "type": "github"
       }
     },
@@ -364,6 +364,22 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-23.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-go": {
+      "locked": {
+        "lastModified": 1703013332,
+        "narHash": "sha256-+tFNwMvlXLbJZXiMHqYq77z/RfmpfpiI3yjL6o/Zo9M=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "54aac082a4d9bb5bbc5c4e899603abfb76a3f6d6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -571,24 +587,28 @@
         "iohk-nix": "iohk-nix",
         "nix-filter": "nix-filter",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-go": "nixpkgs-go",
         "nixpkgs-solc": "nixpkgs-solc",
         "nixpkgs-vercel": "nixpkgs-vercel",
         "rust-overlay": "rust-overlay_2",
         "treefmt-nix": "treefmt-nix",
         "v0_14_0": "v0_14_0",
-        "v0_15_0": "v0_15_0"
+        "v0_15_0": "v0_15_0",
+        "v0_16_0": "v0_16_0",
+        "v0_17_0": "v0_17_0",
+        "wasmd": "wasmd"
       },
       "locked": {
-        "lastModified": 1700671107,
-        "narHash": "sha256-VuIMbNKI0erJPOH7CG/MhTicac423mCd5mey/oO53tM=",
+        "lastModified": 1703110666,
+        "narHash": "sha256-oKYwV5TS6qKEwh57KXgC1y4LWwbxIv8N02rrLyOSdV4=",
         "owner": "unionlabs",
         "repo": "union",
-        "rev": "d67e54996294aee4e5f8c82a139809699c9f43ac",
+        "rev": "fa6dfecb6cfd89b6827c2992efb37675f8a147ab",
         "type": "github"
       },
       "original": {
         "owner": "unionlabs",
-        "ref": "release-v0.15.0",
+        "ref": "release-v0.17.0",
         "repo": "union",
         "type": "github"
       }
@@ -624,6 +644,57 @@
         "owner": "unionlabs",
         "ref": "release-v0.15.0",
         "repo": "union",
+        "type": "github"
+      }
+    },
+    "v0_16_0": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1702502207,
+        "narHash": "sha256-XWy2uNNxzF8YpxljiRPhlyMJNmvRI+NS2jdo2FB0cjo=",
+        "owner": "unionlabs",
+        "repo": "union",
+        "rev": "fea649284ccaa81a80d013edcb83a3bb990ba761",
+        "type": "github"
+      },
+      "original": {
+        "owner": "unionlabs",
+        "ref": "release-v0.16.0",
+        "repo": "union",
+        "type": "github"
+      }
+    },
+    "v0_17_0": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1703110666,
+        "narHash": "sha256-oKYwV5TS6qKEwh57KXgC1y4LWwbxIv8N02rrLyOSdV4=",
+        "owner": "unionlabs",
+        "repo": "union",
+        "rev": "fa6dfecb6cfd89b6827c2992efb37675f8a147ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "unionlabs",
+        "ref": "release-v0.17.0",
+        "repo": "union",
+        "type": "github"
+      }
+    },
+    "wasmd": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1695205573,
+        "narHash": "sha256-BQiMpme5+/s8U8LoG5RxgJnuR5idA5ijaAAmCmpizvQ=",
+        "owner": "CosmWasm",
+        "repo": "wasmd",
+        "rev": "03f3c72a6ce447fafc2da023a1322899327433f8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "CosmWasm",
+        "repo": "wasmd",
+        "rev": "03f3c72a6ce447fafc2da023a1322899327433f8",
         "type": "github"
       }
     }

@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    union.url = "github:unionlabs/union/release-v0.15.0";
+    union.url = "github:unionlabs/union/release-v0.17.0";
     # sops-nix.url = "github:Mic92/sops-nix";
   };
   outputs = { self, nixpkgs, union, ... }:
