@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    union.url = "github:unionlabs/union/release-v0.17.0";
+    union.url = "github:unionlabs/union/release-v0.19.0";
     # sops-nix.url = "github:Mic92/sops-nix";
   };
   outputs = { self, nixpkgs, union, ... }:
@@ -11,6 +11,30 @@
           system = "x86_64-linux";
           domain = "testnet.bonlulu.uno";
           pkgs = import nixpkgs { inherit system; };
+          explorer = pkgs.mkYarnPackage {
+            src = pkgs.fetchFromGitHub {
+              owner = "hussein-aitlahcen";
+              repo = "explorer";
+              rev = "b4c23b94fe3245dddf0185e54b39dbb97117efa6";
+              hash = "sha256-9S4XS6f7CliujM4AKq/AkII9wxI/ANsGrHd5GqXTUxE=";
+            };
+            configurePhase = ''
+              cp -r $node_modules node_modules
+              chmod +w node_modules
+              substituteInPlace src/chains/testnet/union.json \
+                --replace 0xc0dejug.uno testnet.bonlulu.uno
+
+            '';
+            buildPhase = ''
+              export HOME=$(mktemp -d)
+              yarn --ignore-engine --offline build
+            '';
+            installPhase = ''
+              mkdir -p $out
+              mv dist/* $out/
+            '';
+            distPhase = "true";
+          };
         in
         nixpkgs.lib.nixosSystem {
           inherit system;
@@ -45,8 +69,8 @@
               services.unionvisor = {
                 enable = true;
                 moniker = "bonlulu";
-                network = "union-testnet-4";
-                seeds = "a069a341154484298156a56ace42b6e6a71e7b9d@blazingbit.io:27656";
+                network = "union-testnet-6";
+                bundle = union.packages.${system}.bundle-testnet-6;
               };
 
               security.acme = {
@@ -111,6 +135,7 @@
                       enableACME = true;
                       forceSSL = true;
                       default = true;
+                      root = "${explorer}";
                       locations."/" = {
                         extraConfig = ''
                           try_files $uri /index.html;
@@ -164,6 +189,7 @@
                 jq
                 neofetch
                 tree
+                kitty
               ];
             }
           ];
