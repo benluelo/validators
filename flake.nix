@@ -1,8 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    # union.url = "github:unionlabs/union/release-v0.19.0";
-    union.url = "github:unionlabs/union/main";
+    union.url = "github:unionlabs/union/release-v0.20.0";
     # sops-nix.url = "github:Mic92/sops-nix";
   };
   outputs = { self, nixpkgs, union, ... }:
@@ -70,8 +69,8 @@
               services.unionvisor = {
                 enable = true;
                 moniker = "bonlulu";
-                network = "union-testnet-6";
-                bundle = union.packages.${system}.bundle-testnet-6;
+                network = "union-testnet-7";
+                bundle = union.packages.${system}.bundle-testnet-7;
               };
 
               security.acme = {
@@ -156,6 +155,10 @@
               };
 
               users.users.datadog.extraGroups = [ "systemd-journal" ];
+              users.users.dd-agent.extraGroups = [ "systemd-journal" ];
+              users.users.dd-agent.isSystemUser = true;
+              users.users.dd-agent.group = "dd-agent";
+              users.groups.dd-agent = { };
 
               services.datadog-agent = {
                 enable = true;
@@ -163,23 +166,23 @@
                 enableLiveProcessCollection = true;
                 enableTraceAgent = true;
                 site = "datadoghq.com";
-                extraIntegrations = { openmetrics = _: [ ]; };
-                extraConfig = { logs_enabled = true; };
+                # extraIntegrations = { openmetrics = _: [ ]; };
+                extraConfig = { logs_enabled = true; logs_config = { }; };
                 checks = {
                   journald = { logs = [{ type = "journald"; }]; };
-                  openmetrics = {
-                    init_configs = { };
-                    instances = [
-                      # metrics are stupid expensive and i don't need them for now
-                      # {
-                      #   openmetrics_endpoint = "http://localhost:26660/metrics";
-                      #   namespace = "cometbft";
-                      #   metrics = [
-                      #     ".*"
-                      #   ];
-                      # }
-                    ];
-                  };
+                  # openmetrics = {
+                  #   init_configs = { };
+                  #   instances = [
+                  #     # metrics are stupid expensive and i don't need them for now
+                  #     # {
+                  #     #   openmetrics_endpoint = "http://localhost:26660/metrics";
+                  #     #   namespace = "cometbft";
+                  #     #   metrics = [
+                  #     #     ".*"
+                  #     #   ];
+                  #     # }
+                  #   ];
+                  # };
                 };
               };
 
