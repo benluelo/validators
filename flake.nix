@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    union.url = "github:unionlabs/union/release-v0.20.0";
+    union.url = "github:unionlabs/union/prep-testnet-8";
     # sops-nix.url = "github:Mic92/sops-nix";
   };
   outputs = { self, nixpkgs, union, ... }:
@@ -65,12 +65,15 @@
               # };
 
               networking.firewall.allowedTCPPorts = [ 80 443 26656 26657 ];
+              # networking.firewall.extraCommands = ''
+              #   iptables -A INPUT -s <IP ADDRESS> -j REJECT
+              # '';
 
               services.unionvisor = {
                 enable = true;
                 moniker = "bonlulu";
                 network = "union-testnet-7";
-                bundle = union.packages.${system}.bundle-testnet-7;
+                bundle = union.packages.${system}.bundle-testnet-8;
               };
 
               security.acme = {
