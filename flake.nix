@@ -1,7 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
-    union.url = "github:unionlabs/union/prep-testnet-8";
+    union.url = "github:unionlabs/union/main";
     # sops-nix.url = "github:Mic92/sops-nix";
   };
   outputs = { self, nixpkgs, union, ... }:
@@ -72,7 +72,7 @@
               services.unionvisor = {
                 enable = true;
                 moniker = "bonlulu";
-                network = "union-testnet-7";
+                network = "union-testnet-8";
                 bundle = union.packages.${system}.bundle-testnet-8;
               };
 
@@ -101,6 +101,7 @@
                         forceSSL = true;
                         extraConfig = ''
                           add_header Access-Control-Allow-Origin *;
+                          add_header Access-Control-Allow-Headers *;
                           add_header Access-Control-Max-Age 3600;
                           add_header Access-Control-Expose-Headers Content-Length;
                         '';
