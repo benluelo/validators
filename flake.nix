@@ -1,16 +1,19 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/10b813040df67c4039086db0f6eaf65c536886c6";
     union.url = "github:unionlabs/union/main";
     # sops-nix.url = "github:Mic92/sops-nix";
   };
-  outputs = { self, nixpkgs, union, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, union, ... }:
     {
       nixosConfigurations.bonlulu =
         let
           system = "x86_64-linux";
           domain = "testnet.bonlulu.uno";
           pkgs = import nixpkgs { inherit system; };
+          pkgs-unstable = import nixpkgs-unstable { inherit system; };
+
           explorer = pkgs.mkYarnPackage {
             src = pkgs.fetchFromGitHub {
               owner = "hussein-aitlahcen";
@@ -64,7 +67,7 @@
               #   };
               # };
 
-              networking.firewall.allowedTCPPorts = [ 80 443 26656 26657 ];
+              networking.firewall.allowedTCPPorts = [ 80 443 26656 26657 10516 10518 ];
               # networking.firewall.extraCommands = ''
               #   iptables -A INPUT -s <IP ADDRESS> -j REJECT
               # '';
@@ -158,22 +161,53 @@
                 };
               };
 
-              users.users.datadog.extraGroups = [ "systemd-journal" ];
-              users.users.dd-agent.extraGroups = [ "systemd-journal" ];
-              users.users.dd-agent.isSystemUser = true;
-              users.users.dd-agent.group = "dd-agent";
-              users.groups.dd-agent = { };
+              users = {
+                users = {
+                  datadog = {
+                    extraGroups = [ "systemd-journal" ];
+                  };
+                  dd-agent = {
+                    extraGroups = [ "systemd-journal" ];
+                    isSystemUser = true;
+                    group = "dd-agent";
+                  };
+                };
+                groups = {
+                  systemd-journal = { };
+                  dd-agent = { };
+                };
+              };
 
               services.datadog-agent = {
                 enable = true;
+                package = pkgs-unstable.datadog-agent;
+                processAgentPackage = pkgs-unstable.datadog-process-agent;
                 apiKeyFile = "/etc/datadog-agent/datadog_api.key";
+                logLevel = "DEBUG";
                 enableLiveProcessCollection = true;
                 enableTraceAgent = true;
                 site = "datadoghq.com";
-                # extraIntegrations = { openmetrics = _: [ ]; };
-                extraConfig = { logs_enabled = true; logs_config = { }; };
+                extraIntegrations = {
+                  http_check = pythonPackages: [ pythonPackages.hatchling ];
+                  journald = pythonPackages: [ pythonPackages.hatchling ];
+                };
+                extraConfig = {
+                  logs_enabled = true;
+                  logs_config = { };
+                  python_version = 3;
+                };
                 checks = {
-                  journald = { logs = [{ type = "journald"; }]; };
+                  journald = {
+                    logs = [{
+                      type = "journald";
+                      container_mode = true;
+                      exclude_units = [
+                        "datadog-agent.service"
+                        "datadog-process-agent.service"
+                        "datadog-trace-agent.service"
+                      ];
+                    }];
+                  };
                   # openmetrics = {
                   #   init_configs = { };
                   #   instances = [
